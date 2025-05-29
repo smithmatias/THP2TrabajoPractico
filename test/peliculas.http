@@ -1,0 +1,33 @@
+###
+GET http://127.0.0.1:3003/api/pelicula
+
+###
+GET http://127.0.0.1:3003/api/pelicula/123
+
+###
+POST http://127.0.0.1:3003/api/pelicula
+Content-Type: application/json
+
+{
+  "title": "Otra pelicula que agrego",
+  "author": "El autor de esta pelicula",
+  "puntaje": "97.3",
+  "publishedDate": "1444-06-05",
+  "availableCopies": 17
+}
+
+###
+PUT http://127.0.0.1:3003/api/pelicula/123
+Content-Type: application/json
+
+{
+  "id": "123",
+  "title": "Otra pelicula que agrego",
+  "author": "El autor de esta pelicula",
+  "puntaje": "97.3",
+  "publishedDate": "1444-06-05",
+  "availableCopies": 17
+}
+
+###
+DELETE http://127.0.0.1:3003/api/pelicula/123
