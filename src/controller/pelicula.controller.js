@@ -1,4 +1,13 @@
 import { PeliculaService } from "../services/pelicula.service.js";
+// Importamos módulos necesarios para manejar rutas de archivos
+import path from "path"; // Para resolver rutas de archivos
+import { fileURLToPath } from "url"; // Para obtener la URL del archivo actual
+
+// Estas dos líneas nos permiten usar __dirname en módulos ES (import/export)
+const __filename = fileURLToPath(import.meta.url); // Obtiene la ruta completa del archivo actual
+const __dirname = path.dirname(__filename); // Extrae el directorio base a partir de esa ruta
+
+
 
 export const PeliculaController = {
   peliculaCreateOne: async (req, res) => {
@@ -118,4 +127,69 @@ export const PeliculaController = {
     });
     return;
   },
+
+getEstadisticas: async (req, res) => {
+    try {
+      const estadisticas = await PeliculaService.getEstadisticas();
+      res.status(200).json(estadisticas);
+    } catch (error) {
+      console.error("Error al obtener estadísticas:", error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
+  },
+
+  peliculaExportar: async (req, res) => {
+    try {
+      const filePath = await PeliculaService.exportarPeliculas();
+
+      if (!filePath) {
+        res.status(404).json({
+          message: "No hay películas para exportar",
+          payload: null,
+          ok: false,
+        });
+        return;
+      }
+
+      const absolutePath = path.resolve(__dirname, "..", filePath.replace("./src/", ""));
+      res.download(absolutePath, "peliculas.csv");
+      return;
+    } catch (error) {
+      console.error("Error al exportar películas:", error);
+      res.status(500).json({
+        message: "Error inesperado al exportar películas",
+        payload: null,
+        ok: false,
+      });
+      return;
+    }
+  },
+    deleteAllMovies: async (req, res) => {
+    if (process.env.NODE_ENV !== "test") {
+      return res.status(403).json({
+        ok: false,
+        message: "No autorizado fuera de entorno de testing",
+        payload: null,
+      });
+    }
+
+    try {
+      await PeliculaService.deleteAll();
+      res.status(200).json({
+        ok: true,
+        message: "Películas eliminadas exitosamente",
+        payload: null,
+      });
+    } catch (error) {
+      console.error("Error al borrar todas las películas:", error);
+      res.status(500).json({
+        ok: false,
+        message: "Error interno al borrar películas",
+        payload: null,
+      });
+    }
+  },
+
+
+
 };

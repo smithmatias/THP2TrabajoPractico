@@ -80,4 +80,15 @@ export const PeliculaRepository = {
     }
     return data;
   },
+
+    deleteAll: async () => {
+    const { error } = await supabase.from("peliculas").delete().neq("id", null);
+    if (error) {
+      console.error("Error al borrar todas las películas:", error);
+      return null;
+    }
+    return true;
+  },
+
+
 };
