@@ -25,7 +25,8 @@
   "contributors": [],
   "scripts": {
     "dev": "node --watch ./src/server.js",
-    "lint": "npx @biomejs/biome check --write ./src"
+    "lint": "npx @biomejs/biome check --write ./src",
+    "start": "node ./src/server.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",

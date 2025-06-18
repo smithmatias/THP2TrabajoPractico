@@ -10,6 +10,7 @@ peliculaRouter.use(basicAuth); //Aca estoy implementando la basicAuth para todas
 // Rutas específicas primero
 peliculaRouter.get("/estadisticas", PeliculaController.getEstadisticas);
 peliculaRouter.get("/exportar", PeliculaController.peliculaExportar);
+peliculaRouter.delete("/all", PeliculaController.deleteAllMovies);
 
 
 // CRUD de películas
@@ -18,8 +19,7 @@ peliculaRouter.get("/:id", PeliculaController.peliculaGetById);
 peliculaRouter.post("/", PeliculaController.peliculaCreateOne);
 peliculaRouter.put("/:id", PeliculaController.peliculaUpdateById);
 peliculaRouter.delete("/:id", PeliculaController.peliculaDeleteOne);
-peliculaRouter.get("/estadisticas", PeliculaController.getEstadisticas);
-peliculaRouter.delete("/all", PeliculaController.deleteAllMovies);
+
 
 
 export { peliculaRouter };

@@ -12,7 +12,7 @@ Authorization: Basic QWRtaW5TaXN0ZW1hOk1pUGFzc1NlZ3VyYTEyMw==
 Content-Type: application/json
 
 {
-  "title": "Otra pelicula que agrego",
+  "title": "Otra peliculon que agrego",
   "author": "El autor de esta pelicula",
   "puntaje": 97.3,
   "publishedDate": "1444-06-05",
@@ -45,10 +45,14 @@ GET http://127.0.0.1:3003/api/pelicula/exportar
 Authorization: Basic QWRtaW5TaXN0ZW1hOk1pUGFzc1NlZ3VyYTEyMw==
 
 ###
-# ❌ Prueba NO FELIZ - Exportar sin películas
+# ep Para eliminar todas las peliculas
+
 DELETE http://127.0.0.1:3003/api/pelicula/all
 Authorization: Basic QWRtaW5TaXN0ZW1hOk1pUGFzc1NlZ3VyYTEyMw==
 
 ###
 GET http://127.0.0.1:3003/api/pelicula/exportar
 Authorization: Basic QWRtaW5TaXN0ZW1hOk1pUGFzc1NlZ3VyYTEyMw==
+
+### Ruta para exportar a HTML
+http://127.0.0.1:3003/exportar.html
