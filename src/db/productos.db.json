@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "nombre": "Producto Bueno",
+    "stockAmount": 16,
+    "fechaIngreso": "2025-07-16T12:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "nombre": "Otro producto",
+    "stockAmount": 8,
+    "fechaIngreso": "2023-07-16T12:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "nombre": "Mas productos",
+    "stockAmount": 17,
+    "fechaIngreso": "2023-04-01T12:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "nombre": "Todavia mas productos",
+    "stockAmount": 99,
+    "fechaIngreso": "2018-10-13T12:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "nombre": "Este tiene mi cumpleaños! Por si quiere mandarme algo. Pero no me acuerdo la horade nacimiento, la verdad es poco comun acordarse eso",
+    "stockAmount": 28,
+    "fechaIngreso": "1997-04-24T12:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "producto": "Algun producto",
+    "stockAmount": 1,
+    "fechaIngreso": "2025-07-16"
+  },
+  {
+    "id": 7,
+    "producto": "Algun producto",
+    "stockAmount": 1,
+    "fechaIngreso": "2025-07-16"
+  },
+  {
+    "id": 8,
+    "producto": "Algun producto",
+    "stockAmount": 1,
+    "fechaIngreso": "2025-07-16"
+  },
+  {
+    "id": 9,
+    "producto": "Algun producto",
+    "stockAmount": 15,
+    "fechaIngreso": "2025-07-16"
+  },
+  {
+    "id": 10,
+    "producto": "Algun producto",
+    "stockAmount": 15,
+    "fechaIngreso": "1950-10-02"
+  }
+]

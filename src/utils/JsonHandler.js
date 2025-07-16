@@ -25,3 +25,5 @@ export const JsonHandler = {
     }
   },
 };
+
+//Esta clase es identica a lo que normalmente utilizamos en la materia para manejar archivos JSON.

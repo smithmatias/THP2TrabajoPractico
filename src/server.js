@@ -4,31 +4,28 @@ dotenv.config();
 import express from "express";
 import morgan from "morgan";
 import { config } from "./config/config.js";
-import { peliculaRouter } from "./routes/pelicula.route.js";
-import { requestLogger } from "./middleware/requestLogger.js";
+import productoRouter from "./routes/producto.route.js";
 
 const app = express();
 
-// Logger HTTP (Morgan)
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
 
-// Body parser
 app.use(express.json());
+
 app.use(express.static("public"));
 
+app.use("/api/productos", productoRouter);
 
-// Middleware custom de logs (según flag ENABLE_LOGS)
-if (process.env.ENABLE_LOGS !== "false") {
-  app.use(requestLogger);
-}
+app.get("/", (req, res) => {
+  res.send("API funcionando");
+});
 
-// Rutas
-app.use("/api/pelicula", peliculaRouter);
+app.use((req, res) => {
+  res.status(404).json({ error: "Ruta no encontrada" });
+});
 
-// Levantar servidor
 app.listen(config.PORT, () => {
   console.log(`Servidor corriendo en http://${config.HOST}:${config.PORT}`);
-  console.log(`Entorno actual: ${process.env.NODE_ENV || "no definido"}`);
 });

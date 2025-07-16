@@ -1,123 +1,40 @@
-# API de Películas con Express y Supabase
+# Final THP 2 - API de Stock de Productos
 
-## 🌍 Resumen
+Gestión de productos con endpoints para listar, crear, obtener productos y actualizar su stock.
+Validaciones estrictas para asegurar integridad de datos.
+Persistencia de datos mediante archivo JSON (productos.db.json).
 
-Este proyecto es una API RESTful construida con **Node.js + Express**, con persistencia de datos en **Supabase**. Permite gestionar un listado de películas mediante operaciones CRUD, obtener estadísticas, exportar datos en CSV y está protegida por autenticación básica. Incluye middleware de logging y estructura modular siguiendo el patrón MVC.
+!NOTA: En base a lo determinado para el parcial corto, no se incluyen utilidades de autenticación ni middlewares relacionados.
 
----
+# Instalación
 
-## 🗂️ Estructura del Proyecto
+Ejecutar:
 
-```
-📁 tp2-proyecto-final
-├── 📂 src
-│   ├── 📂 controllers      # Controladores (lógica de negocio)
-│   ├── 📂 routes           # Definición de endpoints
-│   ├── 📂 models           # Modelo Pelicula
-│   ├── 📂 services         # Lógica intermedia entre controller y repositorio
-│   ├── 📂 repositories     # Acceso a Supabase (CRUD + logs)
-│   ├── 📂 middleware       # Middlewares: logger y auth
-│   ├── 📂 config           # Configuraciones globales y variables de entorno
-│   ├── 📂 utils            # Exportador CSV
-│   ├── server.js          # Punto de entrada del servidor
-├── 📂 tests               # Requests .http y pruebas manuales
-├── .env                  # Variables de entorno
-├── package.json          # Dependencias y scripts
-├── README.md             # Documentación
-```
-
----
-
-## 🔧 Configuraciones Generales (`src/config/config.js`)
-
-- Puerto y host de escucha (`PORT`, `HOST`)
-- Credenciales para autenticación básica (`BASIC_AUTH_USER`, `BASIC_AUTH_PASS`)
-- `SUPABASE_URL` y `SUPABASE_KEY` para conectarse a la base de datos
-
-> Nota: `DB_PATH` está obsoleto, ya no se usa un JSON local.
-
----
-
-## 🚀 Endpoints Disponibles (prefijo `/api/pelicula`)
-
-### CRUD principal
-
-- `GET /` — Lista todas las películas
-- `GET /:id` — Obtiene una película por ID
-- `POST /` — Crea una nueva película
-- `PUT /:id` — Actualiza una película existente
-- `DELETE /:id` — Elimina una película
-
-### Funcionalidades adicionales
-
-- `GET /estadisticas` — Devuelve:
-
-  - Total de películas
-  - Promedio de puntaje
-  - Cantidad de películas por autor
-
-- `GET /exportar` — Exporta todas las películas como un archivo CSV descargable
-
-- `DELETE /all` — Elimina **todas** las películas (solo habilitado en `NODE_ENV=test`)
-
----
-
-## 🪧 Middleware
-
-### Autenticación Básica (`basicAuth`)
-
-Valida las credenciales enviadas por header `Authorization`. En caso incorrecto, responde con 401.
-
-### Logger de Requests (`requestLogger`)
-
-Mide la duración de cada request y guarda un log en Supabase (tabla `logs`).
-
----
-
-## 🔮 Testing Manual (`tests/peliculas.http`)
-
-Se provee un archivo `.http` para realizar peticiones de prueba:
-
-- CRUD completo
-- Exportación CSV
-- Estadísticas
-- Casos no felices (datos faltantes o ID inexistente)
-- Eliminación masiva para limpiar el estado
-
-> Puede usarse con la extensión REST Client de VSCode o herramientas como Insomnia/Postman.
-
----
-
-## 🔹 Consideraciones Finales
-
-- El proyecto cumple con los requisitos de la materia: modularidad, casos de uso moderados, autenticación, logging, y pruebas.
-- Se recomienda levantar el server con:
-
-```bash
 npm install
-dotenv -e .env -- node src/server.js
-```
 
-- Si se desea probar `DELETE /all`, levantar con:
+# Uso
 
-```bash
-NODE_ENV=test npm run dev
-```
+Levantar el servidor:
+npm run dev
 
-- Para descargar el archivo CSV vía interfaz, abrir en navegador:
-  http://localhost:3003/exportar.html
+La API estará disponible en: http://localhost:3003/api/productos
 
-## Modo de Pruebas y Endpoint de Borrado Masivo
+# Endpoints
 
-- Para poder usar el endpoint de borrado masivo de películas (DELETE /api/pelicula/all), es necesario ejecutar el servidor con la variable NODE_ENV seteada en test:
+GET /api/productos — Listar todos los productos.
+GET /api/productos/:id — Obtener producto por ID.
+POST /api/productos — Crear un nuevo producto.
+PATCH /api/productos/:id/incremento-stock — Incrementar stock de un producto.
 
-NODE_ENV=test npm run dev
+Documentación de prueba para los endpóints se encuentra en el archivo test.endpoints.htpp.
 
-## Esto protege el uso de este endpoint para que no se ejecute por accidente en entornos productivos y no nos Rajen!
+# Validaciones
 
-## 📁 Datos de Supabase (Proyecto del equipo)
+producto es obligatorio y no puede estar vacío.
+stockAmount debe ser entero mayor o igual a 0.
+Incremento de stock debe ser entero mayor o igual a 1.
+fechaIngreso debe ser fecha válida en formato ISO 8601 (YYYY-MM-DD).
 
-- **Organization:** Trabajo Práctico THP 2
-- **Project Name:** Proyecto THP 2
-- **Region:** East US (Ohio)
-- **Database Password:** 1Q29MDQj9I# (acceso compartido entre los integrantes)
+# Pruebas
+
+El archivo tests/test.endpoints.http contiene ejemplos para probar la API con herramientas compatibles con archivos HTTP (como REST Client en VS Code).

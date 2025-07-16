@@ -1,0 +1,51 @@
+### Crear producto (caso feliz)
+POST http://localhost:3000/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Producto Ejemplo",
+  "stockAmount": 15,
+  "fechaIngreso": "2025-07-16T12:00:00.000Z"
+}
+
+###
+
+### Crear producto inválido (stock negativo)
+POST http://localhost:3000/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Producto Malo",
+  "stockAmount": -3,
+  "fechaIngreso": "2025-07-16T12:00:00.000Z"
+}
+
+###
+
+### Listar todos los productos que existan
+GET http://localhost:3000/api/productos
+
+###
+
+### Obtener producto por ID (caso de ejemplo ID 2)
+GET http://localhost:3000/api/productos/2
+
+###
+
+### Incrementar stock válido (caso de ejemplo ID 2)
+PATCH http://localhost:3000/api/productos/2/incremento-stock
+Content-Type: application/json
+
+{
+  "cantidad": 5
+}
+
+###
+
+### Incrementar stock inválido (cantidad menor a 1) (caso de ejemplo ID 2)
+PATCH http://localhost:3000/api/productos/2/incremento-stock
+Content-Type: application/json
+
+{
+  "cantidad": -3
+}
